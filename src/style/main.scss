@@ -2,9 +2,112 @@
 * Third Party
 */
 @import "../../bower_components/normalize.css/normalize.css";
+@import "../../bower_components/breakpoint-sass/stylesheets/breakpoint";
+@import "../../bower_components/susy/sass/susy";
 
 
-/*
-* Custom
-*/
-@import "partials/variable";
+h1 { color: #004;}
+.test {
+  color: #000;
+  &-red {
+    color: #a00;
+  }
+}
+
+
+@mixin respond-to($media) {
+  @if $media == sm {
+    @media only screen and (max-width: 479px) { @content; }
+  }
+  @else if $media == md {
+    @media only screen and (min-width: 480px) and (max-width: 767px) { @content; }
+  }
+  @else if $media == lg {
+    @media only screen and (min-width: 768px) and (max-width: 959px) { @content; }
+  }
+}
+
+$susy: (
+  columns: 12,
+  
+  container: 60em,
+  math: fluid,
+  output: float,
+  gutter-position: outside,
+  
+  debug: (
+    image: show,
+    color: rgba(#66f, .3),
+    output: foregound,
+    toggle: top right,
+  )
+  
+);
+
+/* Susy Grid Rules */
+
+#main {
+  @include container();
+  // Using Compass Vertical Rhythm
+  // @include margin-trailer(2);
+  // @include margin-leader(2);
+  @include respond-to(md) {
+    margin: 0;
+  }
+}
+
+#masthead {
+  @include span(12);
+  background: rgba(green, .7);
+}
+
+#content {
+  @include span(7);
+  background: rgba(darkorange, .7);
+  @include respond-to(md) {
+    @include span(12);
+  }
+}
+
+#sidebar {
+  @include span(5 last);
+  background: rgba(hotpink, .7);
+  @include respond-to(md) {
+    @include span(12);
+  }
+}
+
+#ad {
+  @include span(7);
+  @include push(2.5);
+  background: #a00;
+  @include respond-to(md) {
+    @include span(12);
+  }
+}
+
+#pre-footer {
+  @include span(12);
+  background: rgba(brown, 1);
+}
+.pre-footer-column {
+  @include span(3.3);
+  &:last-child {
+    @include span(3.3 last);
+    @include respond-to(md) {
+      @include span(12);
+    }
+  }
+  @include respond-to(md) {
+    @include span(12);
+  }
+}
+
+#colophon {
+  @include span(12);
+  // Using Compass Vertical Rhythm
+  // @include padding-trailer(1);
+  // @include padding-leader(1);
+  background: rgba(black, .7);
+}
+
